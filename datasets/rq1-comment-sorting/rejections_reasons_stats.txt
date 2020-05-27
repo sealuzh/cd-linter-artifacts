@@ -1,0 +1,62 @@
+#### Analysis of rejected issues ####
+-> Overall stats
+ -> Category stats
+Job-Allow-Failure    22
+Versioning           11
+Job-Retry             4
+Manual-Job            2
+Name: category, dtype: int64
+ -> Label stats
+com::agreement                    4
+com::flaky-tool                   3
+fix::self-admitted                3
+com::prefer-last-version          3
+com::tool-upgrade                 3
+com::flaky-env                    3
+com::no-trust                     3
+bug::pip-install                  2
+com::let-it-run                   2
+com::no-time                      2
+com::temporary-smell              2
+com::optional-job                 2
+bug::code-quality                 1
+bug::deploy-phase                 1
+com::depedency-scanning           1
+com::nightly-build                1
+com::incomplete-implementation    1
+com::dependency-scanning          1
+bug::optional-job                 1
+Name: label, dtype: int64
+-> Job-Allow-Failure : 22
+com::agreement                    3
+com::flaky-tool                   2
+fix::self-admitted                2
+com::optional-job                 2
+com::temporary-smell              2
+com::let-it-run                   2
+bug::optional-job                 1
+com::depedency-scanning           1
+com::no-time                      1
+bug::code-quality                 1
+com::nightly-build                1
+com::flaky-env                    1
+com::no-trust                     1
+com::dependency-scanning          1
+com::incomplete-implementation    1
+Name: label, dtype: int64
+-> Job-Retry : 4
+com::flaky-env        2
+com::flaky-tool       1
+fix::self-admitted    1
+Name: label, dtype: int64
+-> Manual-Job : 2
+bug::deploy-phase    1
+com::no-trust        1
+Name: label, dtype: int64
+-> Versioning : 11
+com::prefer-last-version    3
+com::tool-upgrade           3
+bug::pip-install            2
+com::agreement              1
+com::no-time                1
+com::no-trust               1

@@ -1,0 +1,16 @@
+pycodestyle
+flake8
+tox
+nose
+pylint
+pytest
+coverage
+setuptools
+pip
+pipenv
+ipython
+codecov
+junit
+mypy
+pytest-cov
+ipython
