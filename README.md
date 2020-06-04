@@ -24,34 +24,40 @@ To build and execute CD-Linter, please run:
 
 	mvn -f cd-linter clean test exec:java -Dexec.mainClass="ch.uzh.seal.app.ConfigurationAnalytics" -Dexec.args="cd-smell-occurrences/dataset.csv cd-smell-occurrences/linter_configfiles cd-linter/target/cd-smells.csv"
 	
-The `cd-smell-occurrences/dataset.csv` file contains the list of projects that have been analyzed in our study (see Section 4.1). The `cd-smell-occurrences/linter_configfiles` folder includes the latest version of the configuration files used to measure the CD-smell occurrences in RQ3 (see Section 4.4).
+The `cd-smell-occurrences/dataset.csv` file contains the list of projects that have been analyzed in our study (see Section 4.1). The `cd-smell-occurrences/linter_configfiles` folder includes the latest version of the configuration files used to measure the CD-smell occurrences in RQ3 (see Section 4.4). The resulting `cd-linter/target/cd-smells.csv` contains all detected smells. The main information for smell is:
+
+* link to the affected configuration file (_Remote Configuration File Link_)
+* smell category (_Category_) and subcategory (_Sub-Category_)
+* stage (_Stage_) and job or dependency (in case of Fuzzy Version) name (_Entity_) where the smell occurs
+
+### Smell Categories
+
+CD-Linter uses different names for the main category of CD smells illustrated in Section 3.2. Those smells are codified in the tool output as follows.
+
+Paper  | CD-Linter
+------------- | -------------
+ Fake Success | Job-Allow-Failure
+ Manual Execution | Manual Job
+ Fuzzy Version | Versioning
+ Retry Failure | Job-Retry
+
 <!--- The resulting `cd-linter/CI-anti-patterns.csv` file corresponds to `cd-smell-occurrences/rq3-results.csv`.-->
 
 ### Query GitLab projects
 
-While its primary goal is to detect CD smells, CD-Linter provides another functionality for the purposes of our study. It mines the full list of open-source projects available on GitLab.com together with some basic statistics such as the languages, number of stars and forks.
+While its primary goal is to detect CD smells, CD-Linter provides another functionality for the purposes of our study. It mines the full list of open-source projects available on GitLab.com together with some basic statistics such as the languages, number of stars, and forks.
 
-To try out this feature, please execute the following command. You are required to set TOKEN with a valid GitLab token<sup>1</sup>. The `cd-linter/target/projects.csv` file will contain the list of projects. Given that a full analysis of the GitLab ecosystem takes weeks, we provide two execution modes: demo (last argument set to 0); full (last argument has a value different from 0).
-
+To try out this feature, please execute the following command.
 
 	mvn -f cd-linter clean test exec:java -Dexec.mainClass="ch.uzh.seal.datamining.gitlab.GitLabMiner" -Dexec.args="$TOKEN cd-linter/target/projects.csv 0"
 
-<!-- The execution returns a file having the same structure of `cd-smell-occurrences/dataset.csv`. -->
+You are required to set TOKEN with a valid GitLab token<sup>1</sup>. The `cd-linter/target/projects.csv` file will contain the resulting list of projects. Given that a full analysis of the GitLab ecosystem takes weeks, we provide two execution modes: demo (last argument set to 0); full (last argument has a value different from 0).
 
 <sup>1</sup> [How To Get a GitLab Access Token](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html)
 
-<!--- ## Construction of the original dataset
-
-We applied several filters from a broad GitLab query to construct a dataset consisting of 5,312 projects.-->
-
 ## Analysis of the Reactions to the Opened Issues (RQ1)
 
-<!--- ### Selection of the issues to open
-
-We detected smells on the latest versions of the selected projects available at <mark>XX</mark>. From the resulting 5,312 smells we selected a sample of 168 smells to open applying several filters. During the assessment stage, we discarded 23 from this set and finally open 145 issues. The full list of issues together with the reactions is available at `XX.csv`.-->
-
-
-All the reactions to the opened-issues (see Section 4.2) have been collected in the `reactions-to-issues/rq1-cd-smells.csv` file. Among the others, each line contains the following information<sup>2</sup>:
+All the reactions to the opened-issues (see Section 4.2) have been collected in the `reactions-to-issues/rq1-cdsmells.csv` file. The most important information contained in each line is<sup>2</sup>:
 
 *  link to the issue (_linkToOpenedIssue_)
 *  status of the reported smell (_fixed_)
@@ -71,7 +77,7 @@ The previous script requires a second argument `reactions-to-issues/fig4-source.
 
 	Rscript reactions-to-issues/likert-scaled-reactions.R reactions-to-issues/fig4-source.csv reactions-to-issues/figure4.png
 
-To download the figure on your local machine search for the \<CONTAINER ID\> of your cotainer by running `docker ps` and then execute:
+To download the figure on your local machine search for the \<CONTAINER ID\> of your container by running `docker ps` and then execute:
 
 	docker cp <CONTAINER ID>:/home/cd-linter-artifacts/reactions-to-issues/figure4.png .
 
@@ -79,7 +85,7 @@ To download the figure on your local machine search for the \<CONTAINER ID\> of 
 
 ### Card-sorting of the Received Comments
 
-Two authors performed an independent tagging of the comments that we received in the opened issues and then merged their annotations. The folder `reactions-to-issues/rq1-comment-sorting` contains the labels (`card-sorting-labels.csv`) and the result of the agreement (`card-sorting-agreement.csv`)
+Two authors performed an independent tagging of the comments that we received in the opened issues and then merged their annotations. The folder `reactions-to-issues/rq1-comment-sorting` contains the labels (`card-sorting-labels.csv`) and the result of the agreement (`card-sorting-agreement.csv`).
 		
 ## Accuracy of CD-Linter (RQ2)
 
@@ -94,28 +100,19 @@ To compute the results shown in Tables 2 and 3 and the recall values (see Sectio
 
 ### Generate a Random Sample to Compute the Recall
 
-We generated a random sample of 100 projects to compute the recall. Specifically, we excluded projects having smells analyzed while studying the precision and contained in the opened issues. To generate such a random sample (and store it in `accuracy/generated-sample.csv`), please run:
+We generated a random sample of 100 projects to compute the recall. Specifically, we excluded projects having smells analyzed while studying the precision (`rq2-precision.csv`) and contained in the opened issues (`rq1-cdsmells.csv`). To generate such a random sample (and store it in `accuracy/generated-sample.csv`), please run:
 
 	python3 accuracy/rq2-recall-sample.py cd-smell-occurrences/dataset.csv accuracy/rq2-precision.csv reactions-to-issues/rq1-cdsmells.csv accuracy/generated-sample.csv
 
-<!-- After incorporating a few feedback in our tool, we rerun it and detected 5,011 smells. We then evaluated CD-Linter's precision and recall measures.
-
-### Selection of smells for precision
-
-Applying several filters (see Section XX), we selected 868 smells to evaluate. The results are available in `hello.csv`. -->
-
 ## Occurrences of CD smells (RQ3)
 
-We run CD Linter against the latest snapshot of the projects that were still available at the end of the six-month study (as already described in [Build and Run CD-Linter](#cd-linter)). The results are available at `cd-smell-occurrences/rq3-results.csv`.
+We run CD Linter against the latest snapshot of the projects that were still available at the end of the six-month study. The output is available at `cd-smell-occurrences/rq3-cd-smells.csv` (the format has been already described in [Build and Run CD-Linter](#cd-linter)).
 
-To compute the results (that are described in Section 5.3), please run:
+To perform the analysis of the CD smell occurrences that is described in Section 5.3, please run:
 
 	python3 cd-smell-occurrences/rq3-analysis.py cd-smell-occurrences/dataset_yml-update.csv cd-smell-occurrences/rq3-cd-smells.csv > cd-smell-occurrences/rq3-results.txt
 
-
-### Compute the size of .gitlab-ci.yml files
-
-You might have noticed that the previous script takes `dataset_yml-update.csv` instead of `dataset.csv`. This file is required for the analysis of CD smells across different .gitlab-ci.yml sizes (see Table 5). To generate it please run the following command.
+You might have noticed that, in addition the detected cd smells, the previous script takes as input the list of projects with an update (`dataset_yml-update.csv`). This file is required for the analysis of CD smells across different _.gitlab-ci.yml_ sizes (see Table 5). To generate the file's content and store it in `cd-linter/target` please run the following command.
 
 	mvn -f cd-linter clean test exec:java -Dexec.mainClass="ch.uzh.seal.app.ConfigurationMiner" -Dexec.args="cd-smell-occurrences/dataset.csv cd-smell-occurrences/linter_configfiles cd-linter/target/dataset_yml-update.csv"
 
