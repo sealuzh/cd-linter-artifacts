@@ -67,9 +67,13 @@ Taking this file as input, please execute the following command to replicate the
 
 The generated output `reactions-to-issues/rq1-results.txt` contains (i) an analysis of the received reactions, (ii) the labels assigned to the rejected issues with their occurrences, and (iii) the resolution type per CD smell.
 
-The previous script requires a second argument `reactions-to-issues/fig4-source.csv`. This is the path to the file that will store the reactions to the issues in a format that can be processed by the following script to generate `reactions-to-issues/figure4.png` <mark>**TODO**: Add Missing Dependency in Dockerfile</mark>
+The previous script requires a second argument `reactions-to-issues/fig4-source.csv`. This is the path to the file that will store the reactions to the issues in a format that can be processed by the following script to generate `reactions-to-issues/figure4.png` <mark>
 
-	Rscript reactions-to-issues/likert-scaled-reactions.R
+	Rscript reactions-to-issues/likert-scaled-reactions.R reactions-to-issues/fig4-source.csv reactions-to-issues/figure4.png
+
+To download the figure on your local machine search for the \<CONTAINER ID\> of your cotainer by running `docker ps` and then execute:
+
+	docker cp <CONTAINER ID>:/home/cd-linter-artifacts/reactions-to-issues/figure4.png .
 
 <sup>2</sup> The last update was done on 05/02/2020.
 

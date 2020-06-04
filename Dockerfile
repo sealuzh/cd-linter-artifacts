@@ -5,8 +5,8 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update -q \
  && apt-get upgrade -q -y \
  && apt-get install -q -y \
-        binutils \
-        openjdk-11-jdk-headless
+        binutils=2.30-21ubuntu1~18.04.3 \
+        openjdk-11-jdk-headless=11.0.7+10-2ubuntu2~18.04
 
 # install Maven
 RUN apt-get -y install maven=3.6.0-1~18.04.1
@@ -19,15 +19,14 @@ RUN apt install software-properties-common -y \
 # install pip
 RUN apt install python3-pip=9.0.1-2.3~ubuntu1.18.04.1 -y
 
-# install R
-# RUN apt-get install r-base -y
-# RUN R -e "install.packages('devtools',dependencies=TRUE, repos='http://cran.rstudio.com/')"
-# RUN R -e "install.packages('likert',dependencies=TRUE, repos='http://cran.rstudio.com/')"
-# > require(devtools)
-# > install_github("likert","jbryer")
+# install R and required packages
+RUN apt-get install r-base=3.4.4-1ubuntu1 -y \
+&& R -e "install.packages('http://azzalini.stat.unipd.it/SW/Pkg-mnormt/mnormt_1.5-5.tar.gz', repos=NULL, type='source')" \
+&& R -e "install.packages('likert')" \
+&& R -e "install.packages('knitr')"
 
-# install an editor
-RUN apt-get install vim -y
+# install vim
+RUN apt-get install vim=2:8.0.1453-1ubuntu1.3 -y
 
 # copy all content inside
 RUN mkdir /home/cd-linter-artifacts
