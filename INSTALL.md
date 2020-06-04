@@ -7,7 +7,7 @@ In this document, you will find all the information you need to setup an environ
 In the root of our replication package, you find a `Dockerfile`. This file can be used the build an image that your Docker installation can run.
 
 1. Install [Docker for Desktop](https://www.docker.com/products/docker-desktop)
-2. Open the terminal and position in the root folder of the replication package.
+2. Open the terminal and set the root folder of the replication package as the working directory.
 3. Build the image `docker build --no-cache -t artifact:v1 .`
 4. Run the image `docker run -it  artifact:v1`
 5. (add dockerignore)

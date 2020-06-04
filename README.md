@@ -31,13 +31,13 @@ The `cd-smell-occurrences/dataset.csv` file contains the list of projects that h
 
 While its primary goal is to detect CD smells, CD-Linter provides another functionality for the purposes of our study. It mines the full list of open-source projects available on GitLab.com together with some basic statistics such as the languages, number of stars and forks.
 
-To try this feature, please execute[^1]: <mark>TODO: Add a valid token that possibly expires soon</mark>
+To try this feature, please execute<sup>1</sup>: <mark>**TODO**: Add a valid token that possibly expires soon</mark>
 
 	mvn clean test exec:java -Dexec.mainClass="ch.uzh.seal.datamining.gitlab.GitLabMiner" -Dexec.args="$TOKEN $OUTPUT 0"
 
 <!-- The execution returns a file having the same structure of `cd-smell-occurrences/dataset.csv`. -->
 
-[^1]: Note that a full analysis of the GitLab ecosystem takes weeks.
+<sup>1</sup> Note that a full analysis of the GitLab ecosystem takes weeks.
 
 <!--- ## Construction of the original dataset
 
@@ -50,7 +50,7 @@ We applied several filters from a broad GitLab query to construct a dataset cons
 We detected smells on the latest versions of the selected projects available at <mark>XX</mark>. From the resulting 5,312 smells we selected a sample of 168 smells to open applying several filters. During the assessment stage, we discarded 23 from this set and finally open 145 issues. The full list of issues together with the reactions is available at `XX.csv`.-->
 
 
-All the reactions to the opened-issues (see Section 4.2) have been collected in the `reactions-to-issues/rq1-cd-smells.csv` file. Among the others, each line contains the following information[^2]:
+All the reactions to the opened-issues (see Section 4.2) have been collected in the `reactions-to-issues/rq1-cd-smells.csv` file. Among the others, each line contains the following information<sup>2</sup>:
 
 *  link to the issue (_linkToOpenedIssue_)
 *  status of the reported smell (_fixed_)
@@ -66,11 +66,11 @@ Taking this file as input, please execute the following command to replicate the
 
 The generated output `reactions-to-issues/rq1-results.txt` contains (i) an analysis of the received reactions, (ii) the labels assigned to the rejected issues with their occurrences, and (iii) the resolution type per CD smell.
 
-The previous script requires a second argument `reactions-to-issues/fig4-source.csv`. This is the path to the file that will store the reactions to the issues in a format that can be processed by the following script to generate `reactions-to-issues/figure4.png` <mark>TODO: Add Missing Dependency in Dockerfile</mark>
+The previous script requires a second argument `reactions-to-issues/fig4-source.csv`. This is the path to the file that will store the reactions to the issues in a format that can be processed by the following script to generate `reactions-to-issues/figure4.png` <mark>**TODO**: Add Missing Dependency in Dockerfile</mark>
 
 	Rscript reactions-to-issues/likert-scaled-reactions.R
 
-[^2]: The last update was done on 05/02/2020.
+<sup>2</sup> The last update was done on 05/02/2020.
 
 ### Card-sorting of the Received Comments
 
@@ -118,6 +118,6 @@ You might have noticed that the previous script takes `dataset_yml-update.csv` i
 
 ### Bad practices in CI/CD
 
-All the good and bad practices that we collected from the _Foundations_ part of Humble's and Farley's book[^3] are collected in `good-bad-cd-practices.csv`.
+All the good and bad practices that we collected from the _Foundations_ part of Humble's and Farley's book<sup>3</sup> are collected in `good-bad-cd-practices.csv`.
 
-[^3]: https://www.oreilly.com/library/view/continuous-delivery-reliable/9780321670250/
+<sup>3</sup> https://www.oreilly.com/library/view/continuous-delivery-reliable/9780321670250/
