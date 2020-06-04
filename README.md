@@ -1,8 +1,10 @@
 # CD-Linter Artifacts
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3861003.svg)](https://doi.org/10.5281/zenodo.3861003)
+
 This is the replication package of the paper "[Configuration Smells in Continuous Delivery Pipelines: A Linter and A Six-Month Study on GitLab](https://doi.org/10.5281/zenodo.3860984)" accepted for publication at [ESEC/FSE 2020](https://2020.esec-fse.org/).
 
-In the following, we describe the artifacts of our paper and how to use them to replicate the results of our study. When appropriate, we also link the description of the artifacts to the relevant sections in the paper.
+In the following, we describe the artifacts of our paper and how to use them to replicate the results of our study. When appropriate, we also link the description of the artifacts to the relevant sections in the paper. A copy of our paper is available [here](VassalloFSE2020.pdf).
 
 ## Environment Set-up
 
