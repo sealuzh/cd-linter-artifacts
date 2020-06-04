@@ -8,19 +8,19 @@ RUN apt-get update -q \
         binutils \
         openjdk-11-jdk-headless
 
-# install Maven (last version)
-RUN apt-get -y install maven
+# install Maven
+RUN apt-get -y install maven=3.6.0-1~18.04.1
 
 # install Python 3.7
 RUN apt install software-properties-common -y \
 && add-apt-repository ppa:deadsnakes/ppa -y \
-&& apt install python3.7 -y
+&& apt install python3.7=3.7.7-1+bionic1 -y
 
 # install pip
-RUN apt install python3-pip -y
+RUN apt install python3-pip=9.0.1-2.3~ubuntu1.18.04.1 -y
 
 # install R
-RUN apt-get install r-base -y
+# RUN apt-get install r-base -y
 # RUN R -e "install.packages('devtools',dependencies=TRUE, repos='http://cran.rstudio.com/')"
 # RUN R -e "install.packages('likert',dependencies=TRUE, repos='http://cran.rstudio.com/')"
 # > require(devtools)

@@ -10,7 +10,6 @@ In the root of our replication package, you find a `Dockerfile`. This file can b
 2. Open the terminal and set the root folder of the replication package as the working directory.
 3. Build the image `docker build --no-cache -t artifact:v1 .`
 4. Run the image `docker run -it  artifact:v1`
-5. (add dockerignore)
 
 ## Setup your own environment
 
