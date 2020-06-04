@@ -27,17 +27,18 @@ To build and execute CD-Linter, please run:
 The `cd-smell-occurrences/dataset.csv` file contains the list of projects that have been analyzed in our study (see Section 4.1). The `cd-smell-occurrences/linter_configfiles` folder includes the latest version of the configuration files used to measure the CD-smell occurrences in RQ3 (see Section 4.4).
 <!--- The resulting `cd-linter/CI-anti-patterns.csv` file corresponds to `cd-smell-occurrences/rq3-results.csv`.-->
 
-### Query GitLab projects and Download Configuration Files
+### Query GitLab projects
 
 While its primary goal is to detect CD smells, CD-Linter provides another functionality for the purposes of our study. It mines the full list of open-source projects available on GitLab.com together with some basic statistics such as the languages, number of stars and forks.
 
-To try this feature, please execute<sup>1</sup>: <mark>**TODO**: Add a valid token that possibly expires soon</mark>
+To try out this feature, please execute the following command. You are required to set TOKEN with a valid GitLab token<sup>1</sup>. The `cd-linter/target/projects.csv` file will contain the list of projects. Given that a full analysis of the GitLab ecosystem takes weeks, we provide two execution modes: demo (last argument set to 0); full (last argument has a value different from 0).
 
-	mvn clean test exec:java -Dexec.mainClass="ch.uzh.seal.datamining.gitlab.GitLabMiner" -Dexec.args="$TOKEN $OUTPUT 0"
+
+	mvn -f cd-linter clean test exec:java -Dexec.mainClass="ch.uzh.seal.datamining.gitlab.GitLabMiner" -Dexec.args="$TOKEN cd-linter/target/projects.csv 0"
 
 <!-- The execution returns a file having the same structure of `cd-smell-occurrences/dataset.csv`. -->
 
-<sup>1</sup> Note that a full analysis of the GitLab ecosystem takes weeks.
+<sup>1</sup> [How To Get a GitLab Access Token](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html)
 
 <!--- ## Construction of the original dataset
 
