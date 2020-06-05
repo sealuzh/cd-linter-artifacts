@@ -118,7 +118,7 @@ You might have noticed that, in addition the detected cd smells, the previous sc
 
 ## Others
 
-### Bad practices in CI/CD
+### Bad Practices in CI/CD
 
 All the good and bad practices that we collected from the _Foundations_ part of Humble's and Farley's book<sup>3</sup> are available in `good-bad-cd-practices.csv`.
 
