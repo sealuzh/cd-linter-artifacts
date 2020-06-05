@@ -120,6 +120,4 @@ You might have noticed that, in addition the detected cd smells, the previous sc
 
 ### Bad Practices in CI/CD
 
-All the good and bad practices that we collected from the _Foundations_ part of Humble's and Farley's book<sup>3</sup> are available in `good-bad-cd-practices.csv`.
-
-<sup>3</sup> https://www.oreilly.com/library/view/continuous-delivery-reliable/9780321670250/
+All the good and bad practices that we collected from the _Foundations_ part of [Humble's and Farley's book](https://www.oreilly.com/library/view/continuous-delivery-reliable/9780321670250/) are available in `good-bad-cd-practices.csv`.
