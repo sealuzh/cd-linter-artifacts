@@ -4,7 +4,7 @@
 
 This is the replication package of the paper "[Configuration Smells in Continuous Delivery Pipelines: A Linter and A Six-Month Study on GitLab](https://doi.org/10.5281/zenodo.3860984)" accepted for publication at [ESEC/FSE 2020](https://2020.esec-fse.org/).
 
-In the following, we describe the artifacts of our paper and how to use them to replicate the results of our study. When appropriate, we also link the description of the artifacts to the relevant sections in the paper. A copy of our paper is available [here](VassalloFSE2020.pdf).
+In the following, we describe the artifacts of our paper and how to use them to replicate the results of our study. When appropriate, we also link the description of the artifacts to relevant sections in the paper. A copy of our paper is available [here](VassalloFSE2020.pdf).
 
 ## Environment Set-up
 
@@ -30,7 +30,7 @@ The `cd-smell-occurrences/dataset.csv` file contains the list of projects that h
 
 * link to the affected configuration file (_Remote Configuration File Link_)
 * smell category (_Category_) and subcategory (_Sub-Category_)
-* stage (_Stage_) and job or dependency (in case of Fuzzy Version) name (_Entity_) where the smell occurs
+* stage (_Stage_) and job's or dependency's (in case of Fuzzy Version) name (_Entity_) where the smell occurs.
 
 ### Smell Categories
 
@@ -43,8 +43,6 @@ Paper  | CD-Linter
  Fuzzy Version | Versioning
  Retry Failure | Job-Retry
 
-<!--- The resulting `cd-linter/CI-anti-patterns.csv` file corresponds to `cd-smell-occurrences/rq3-results.csv`.-->
-
 ### Query GitLab projects
 
 While its primary goal is to detect CD smells, CD-Linter provides another functionality for the purposes of our study. It mines the full list of open-source projects available on GitLab.com together with some basic statistics such as the languages, number of stars, and forks.
@@ -55,7 +53,7 @@ To try out this feature, please execute the following command.
 
 You are required to set TOKEN with a valid GitLab token<sup>1</sup>. The `cd-linter/target/projects.csv` file will contain the resulting list of projects. Given that a full analysis of the GitLab ecosystem takes weeks, we provide two execution modes: demo (last argument set to 0); full (last argument has a value different from 0).
 
-<sup>1</sup> [How To Get a GitLab Access Token](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html)
+<sup>1</sup> [How To Get a GitLab Access Token](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html). We do not provide a token in this document as this would generate a security smell. 
 
 ## Analysis of the Reactions to the Opened Issues (RQ1)
 
@@ -67,7 +65,7 @@ All the reactions to the opened-issues (see Section 4.2) have been collected in 
 *  number of upvotes (_numUpvotes_), downvotes (_numDownvotes_), and comments (_numComments_)
 *  status of the issue (_state_)
 *  assignment to team members (_isAssigned_)
-*  resolution time in ms (_resolution-time_)
+*  resolution time (_resolution-time_)
 
 Taking this file as input, please execute the following command to replicate the analysis performed in RQ1.
 
@@ -75,7 +73,7 @@ Taking this file as input, please execute the following command to replicate the
 
 The generated output `reactions-to-issues/rq1-results.txt` contains (i) an analysis of the received reactions, (ii) the labels assigned to the rejected issues with their occurrences, and (iii) the resolution type per CD smell.
 
-The previous script requires a second argument `reactions-to-issues/fig4-source.csv`. This is the path to the file that will store the reactions to the issues in a format that can be processed by the following script to generate `reactions-to-issues/figure4.png` <mark>
+The previous script requires a second argument `reactions-to-issues/fig4-source.csv`. This is the path to the file that will store the reactions to the issues in a format that can be processed by the following script to generate `reactions-to-issues/figure4.png`.
 
 	Rscript reactions-to-issues/likert-scaled-reactions.R reactions-to-issues/fig4-source.csv reactions-to-issues/figure4.png
 
@@ -95,7 +93,7 @@ The results of the manual validation of CD smells (see Section 4.3) are availabl
 
 The first file, that we used to compute the precision of our tool, contains a sample of detected CD smells together with the final tag (or rating) assigned by the validators. The `accuracy/rq2-recall-sample.csv` file contains instead the list of projects inspected for the recall analysis of CD-Linter. We compared the list of manually identified smells with the ones detected by CD-Linter in `accuracy/rq2-recall.csv`. Specifically, given a manually identified smell, the column _match with cd-linter_ contains _YES_ if the smell was also detected by CD-Linter.
 
-To compute the results shown in Tables 2 and 3 and the recall values (see Section 5.2), please run:
+To compute the results (stored in `accuracy/rq2-results.txt`) shown in Tables 2 and 3 and the recall value (see Section 5.2), please run:
 
 	python3 accuracy/rq2-analysis.py accuracy/rq2-precision.csv accuracy/rq2-recall.csv > accuracy/rq2-results.txt
 
@@ -110,7 +108,7 @@ We generated a random sample of 100 projects to compute the recall. Specifically
 
 We run CD Linter against the latest snapshot of the projects that were still available at the end of the six-month study. The output is available at `cd-smell-occurrences/rq3-cd-smells.csv` (the format has been already described in [Build and Run CD-Linter](#cd-linter)).
 
-To perform the analysis of the CD smell occurrences that is described in Section 5.3, please run:
+To perform the analysis of the CD smell occurrences that is described in Section 5.3 and generate `cd-smell-occurrences/rq3-results.txt`, please run:
 
 	python3 cd-smell-occurrences/rq3-analysis.py cd-smell-occurrences/dataset_yml-update.csv cd-smell-occurrences/rq3-cd-smells.csv > cd-smell-occurrences/rq3-results.txt
 
@@ -122,6 +120,6 @@ You might have noticed that, in addition the detected cd smells, the previous sc
 
 ### Bad practices in CI/CD
 
-All the good and bad practices that we collected from the _Foundations_ part of Humble's and Farley's book<sup>3</sup> are collected in `good-bad-cd-practices.csv`.
+All the good and bad practices that we collected from the _Foundations_ part of Humble's and Farley's book<sup>3</sup> are available in `good-bad-cd-practices.csv`.
 
 <sup>3</sup> https://www.oreilly.com/library/view/continuous-delivery-reliable/9780321670250/
