@@ -2,7 +2,7 @@
 
 In this document, you will find all the information you need to setup an environment that can execute our artifacts.
 
-## Execute the artifacts in a Docker Container (Recommended)
+## Execute the Artifacts in a Docker Container (Recommended)
 
 In the root of our replication package, you find a `Dockerfile`. This file can be used the build an image that your Docker installation can run.
 
@@ -11,7 +11,7 @@ In the root of our replication package, you find a `Dockerfile`. This file can b
 3. Build the image `docker build --no-cache -t cd-linter-artifacts:v1 .`
 4. Run the image `docker run -it cd-linter-artifacts:v1`
 
-## Setup your own environment
+## Setup Your Own Environment
 
 If you like, you can build your own environment to execute the artifacts. You need to manually install the following tools and copy the content of our replication package.
 

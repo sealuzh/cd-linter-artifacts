@@ -39,7 +39,7 @@ CD-Linter uses different names for the main category of CD smells illustrated in
 Paper  | CD-Linter
 ------------- | -------------
  Fake Success | Job-Allow-Failure
- Manual Execution | Manual Job
+ Manual Execution | Manual-Job
  Fuzzy Version | Versioning
  Retry Failure | Job-Retry
 
